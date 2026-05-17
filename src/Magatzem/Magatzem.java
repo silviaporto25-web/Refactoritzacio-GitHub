@@ -12,14 +12,14 @@ public class Magatzem {
     }
 
     public void actualitzarEstat() {
+    	
         for (int i = 0; i < articles.length; i++) {
         	
         	Article article = articles[i];
         	
-            if (!article.nom.equals(FORMATGE)
-                    && !article.nom.equals(ENTRADES)) {
+            if (!esFormatge(article) && !esEntrada(article)) {
                 if (article.qualitat > 0) {
-                    if (!article.nom.equals(MARTELL)) {
+                    if (!esMartell(article)) {
                         article.qualitat = article.qualitat - 1;
                     }
                 }
@@ -27,7 +27,7 @@ public class Magatzem {
                 if (article.qualitat < 50) {
                     article.qualitat = article.qualitat + 1;
 
-                    if (article.nom.equals(ENTRADES)) {
+                    if (esEntrada(article)) {
                         if (article.diesPerVendre < 11) {
                             if (article.qualitat < 50) {
                                 article.qualitat = article.qualitat + 1;
@@ -43,15 +43,15 @@ public class Magatzem {
                 }
             }
 
-            if (!article.nom.equals(MARTELL)) {
+            if (!esMartell(article)) {
                 article.diesPerVendre = article.diesPerVendre - 1;
             }
 
             if (article.diesPerVendre < 0) {
-                if (!article.nom.equals(FORMATGE)) {
-                    if (!article.nom.equals(ENTRADES)) {
+                if (!esFormatge(article)) {
+                    if (!esEntrada(article)) {
                         if (article.qualitat > 0) {
-                            if (!article.nom.equals(MARTELL)) {
+                            if (!esMartell(article)) {
                                 article.qualitat = article.qualitat - 1;
                             }
                         }
@@ -65,6 +65,18 @@ public class Magatzem {
                 }
             }
         }
+    }
+    
+    private boolean esFormatge(Article article) {
+        return article.nom.equals(FORMATGE);
+    }
+
+    private boolean esEntrada(Article article) {
+        return article.nom.equals(ENTRADES);
+    }
+
+    private boolean esMartell(Article article) {
+        return article.nom.equals(MARTELL);
     }
 
 }
