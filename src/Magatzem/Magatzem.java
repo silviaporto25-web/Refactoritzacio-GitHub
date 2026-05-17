@@ -17,31 +17,25 @@ public class Magatzem {
         	
         	Article article = articles[i];
         	
-            if (!esFormatge(article) && !esEntrada(article)) {
-                if (article.qualitat > 0) {
-                    if (!esMartell(article)) {
-                        article.qualitat = article.qualitat - 1;
-                    }
-                }
-            } else {
-                if (article.qualitat < 50) {
-                    article.qualitat = article.qualitat + 1;
+        	if (!esFormatge(article) && !esEntrada(article)) {
 
+                if (!esMartell(article)) {
+                    baixarQualitat(article);
+                }
+
+            } else {
+            	pujarQualitat(article);
+            	
                     if (esEntrada(article)) {
                         if (article.diesPerVendre < 11) {
-                            if (article.qualitat < 50) {
-                                article.qualitat = article.qualitat + 1;
-                            }
+                        	pujarQualitat(article);
                         }
 
                         if (article.diesPerVendre < 6) {
-                            if (article.qualitat < 50) {
-                                article.qualitat = article.qualitat + 1;
-                            }
+                        	pujarQualitat(article);
                         }
                     }
                 }
-            }
 
             if (!esMartell(article)) {
                 article.diesPerVendre = article.diesPerVendre - 1;
@@ -52,16 +46,14 @@ public class Magatzem {
                     if (!esEntrada(article)) {
                         if (article.qualitat > 0) {
                             if (!esMartell(article)) {
-                                article.qualitat = article.qualitat - 1;
+                            	baixarQualitat(article);
                             }
                         }
                     } else {
-                        article.qualitat = article.qualitat - article.qualitat;
+                        article.qualitat = 0;
                     }
                 } else {
-                    if (article.qualitat < 50) {
-                        article.qualitat = article.qualitat + 1;
-                    }
+                	 pujarQualitat(article);
                 }
             }
         }
@@ -77,6 +69,18 @@ public class Magatzem {
 
     private boolean esMartell(Article article) {
         return article.nom.equals(MARTELL);
+    }
+    
+    private void pujarQualitat(Article article) {
+        if (article.qualitat < 50) {
+            article.qualitat = article.qualitat + 1;
+        }
+    }
+
+    private void baixarQualitat(Article article) {
+        if (article.qualitat > 0) {
+            article.qualitat = article.qualitat - 1;
+        }
     }
 
 }
