@@ -9,51 +9,54 @@ public class Magatzem {
 
     public void actualitzarEstat() {
         for (int i = 0; i < articles.length; i++) {
-            if (!articles[i].nom.equals("Formatge Gidurat")
-                    && !articles[i].nom.equals("Entrades per al Concert del Trobador")) {
-                if (articles[i].qualitat > 0) {
-                    if (!articles[i].nom.equals("Martell de Thor (Llegendari)")) {
-                        articles[i].qualitat = articles[i].qualitat - 1;
+        	
+        	Article article = articles[i];
+        	
+            if (!article.nom.equals("Formatge Gidurat")
+                    && !article.nom.equals("Entrades per al Concert del Trobador")) {
+                if (article.qualitat > 0) {
+                    if (!article.nom.equals("Martell de Thor (Llegendari)")) {
+                        article.qualitat = article.qualitat - 1;
                     }
                 }
             } else {
-                if (articles[i].qualitat < 50) {
-                    articles[i].qualitat = articles[i].qualitat + 1;
+                if (article.qualitat < 50) {
+                    article.qualitat = article.qualitat + 1;
 
-                    if (articles[i].nom.equals("Entrades per al Concert del Trobador")) {
-                        if (articles[i].diesPerVendre < 11) {
-                            if (articles[i].qualitat < 50) {
-                                articles[i].qualitat = articles[i].qualitat + 1;
+                    if (article.nom.equals("Entrades per al Concert del Trobador")) {
+                        if (article.diesPerVendre < 11) {
+                            if (article.qualitat < 50) {
+                                article.qualitat = article.qualitat + 1;
                             }
                         }
 
-                        if (articles[i].diesPerVendre < 6) {
-                            if (articles[i].qualitat < 50) {
-                                articles[i].qualitat = articles[i].qualitat + 1;
+                        if (article.diesPerVendre < 6) {
+                            if (article.qualitat < 50) {
+                                article.qualitat = article.qualitat + 1;
                             }
                         }
                     }
                 }
             }
 
-            if (!articles[i].nom.equals("Martell de Thor (Llegendari)")) {
-                articles[i].diesPerVendre = articles[i].diesPerVendre - 1;
+            if (!article.nom.equals("Martell de Thor (Llegendari)")) {
+                article.diesPerVendre = article.diesPerVendre - 1;
             }
 
-            if (articles[i].diesPerVendre < 0) {
-                if (!articles[i].nom.equals("Formatge Gidurat")) {
-                    if (!articles[i].nom.equals("Entrades per al Concert del Trobador")) {
-                        if (articles[i].qualitat > 0) {
-                            if (!articles[i].nom.equals("Martell de Thor (Llegendari)")) {
-                                articles[i].qualitat = articles[i].qualitat - 1;
+            if (article.diesPerVendre < 0) {
+                if (!article.nom.equals("Formatge Gidurat")) {
+                    if (!article.nom.equals("Entrades per al Concert del Trobador")) {
+                        if (article.qualitat > 0) {
+                            if (!article.nom.equals("Martell de Thor (Llegendari)")) {
+                                article.qualitat = article.qualitat - 1;
                             }
                         }
                     } else {
-                        articles[i].qualitat = articles[i].qualitat - articles[i].qualitat;
+                        article.qualitat = article.qualitat - article.qualitat;
                     }
                 } else {
-                    if (articles[i].qualitat < 50) {
-                        articles[i].qualitat = articles[i].qualitat + 1;
+                    if (article.qualitat < 50) {
+                        article.qualitat = article.qualitat + 1;
                     }
                 }
             }
